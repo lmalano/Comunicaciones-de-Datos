@@ -1,0 +1,23 @@
+from flask import Flask, request, jsonify
+app=Flask(__name__)
+
+port=4000
+ip="192.168.50.113"
+
+@app.route('/basico')
+def basico():
+        return "metodo GET basico"
+
+@app.route('/principal')
+def ciao():
+        nombre = request.args.get('nombre').upper()
+        apellido = request.args.get('apellido').upper()
+        return "hola mi nombre es {} {} ".format(nombre,apellido)
+
+@app.route('/login', methods=['POST'])
+def login():
+        name = request.form.get('name')
+        password = request.form.get('password')
+        return "logueado con usuario: %s clave: %s" %(name,password)
+
+app.run(ip,port)
